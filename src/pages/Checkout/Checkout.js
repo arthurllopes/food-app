@@ -1,16 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Body } from '../Home/style'
+import Cart from '../../Components/Cart/Cart'
+import Information from '../../Components/Information/Information'
 
 const Checkout = () => {
     return (
-        <div>
-            checkout
-            <button>
-                <Link to="confirmation">
-                finalizar
-                </Link>
-            </button>
-        </div>
+        <Body>
+            <Information />
+            <Cart check={false} />
+        </Body>
     )
 }
 

@@ -1,9 +1,8 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit'
-import Item from './Item'
+import Category from './Category'
 import Cart from './Cart'
-import data from './Data'
 
-const reducer = combineReducers({Item, data})
+const reducer = combineReducers({Category, Cart})
 const store = configureStore({reducer})
 
 export default store;

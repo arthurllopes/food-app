@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import Cart from '../../Components/Cart/Cart'
 import ItemList from '../../Components/ItemList/ItemList'
 import MenuNav from '../../Components/MenuNav/MenuNav'
@@ -11,14 +10,8 @@ const Home = () => {
         <MenuNav />
         <Body>
             <ItemList/>
-            <Cart />
+            <Cart check={true} />
         </Body>
-
-        <button>
-            <Link to="checkout">
-            finalizar
-            </Link>
-        </button>
         </>
     )
 }

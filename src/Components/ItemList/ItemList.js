@@ -1,22 +1,24 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
-import { api } from '../../service/api'
+import { useDispatch } from 'react-redux'
+import { useSelector} from 'react-redux'
+import { newItems } from '../../store/Category'
 import Item from '../Item/Item'
 import { ListContainer } from './style'
 
 const ItemList = () => {
-    const {category} = useSelector(state => state.Item)
-    const [dados, setDados] = React.useState([])
+    const dispatch = useDispatch()
+    const {category, items} = useSelector(state => state.Category)
+
     React.useEffect(() => {
-        api.get(`/${category === 'Pizzas' ? 'pizza' : category}`).then(response => setDados(response.data))
-    }, [category])
+        dispatch(newItems(category))
+    }, [category, dispatch])
 
     return (
         <ListContainer>
             <div className="title">
                 <h1>{category}</h1>
             </div>
-            {dados && dados.map((item) => (
+            {items && items.map((item) => (
                 <Item key={item.id} item={item}></Item>
             ))}
         </ListContainer>

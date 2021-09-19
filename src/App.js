@@ -6,7 +6,6 @@ import Confirmation from './pages/Confirmation/Confirmation';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 function App() {
   return (
-    <div className="App">
       <BrowserRouter>
         <GlobalStyle />
         <Switch>
@@ -21,7 +20,6 @@ function App() {
           </Route>
         </Switch>
       </BrowserRouter>
-    </div>
   );
 }
 

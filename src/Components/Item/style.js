@@ -41,4 +41,16 @@ export const ItemContainer = styled.div`
         padding: 2px 8px;
         border-radius: 8px;
     }
+    animation: enterLeft ease 1s forwards;
+
+    @keyframes enterLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-60px); 
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    
 `

@@ -1,6 +1,9 @@
 import React from 'react'
-import NavItem from '../NavItem/NavItem'
-import { MenuContainer, Navbar } from './style'
+import { MenuContainer, Navbar, NavItem } from './style'
+import { NavLink } from 'react-router-dom'
+import { useLocation } from 'react-router'
+import { useDispatch } from 'react-redux'
+import { setCategory } from '../../store/Category'
 import pizza from '../../assets/pizza-icon.svg'
 import drinks from '../../assets/drinks-icon.svg'
 import desserts from '../../assets/desserts-icon.svg'
@@ -25,11 +28,22 @@ const MenuNav = () => {
         image: `${desserts}`,
         }, 
     ]
+    const {pathname} = useLocation()
+    const dispatch = useDispatch()
     return (
         <MenuContainer>
             <Navbar>
                 {items.map((item, index) => (
-                    <NavItem key={index} item={item} /> 
+                    <NavLink key={index} to={`/${item.slug}`} onClick={() => dispatch(setCategory(item.slug))} activeStyle={{backgroundColor: '#ffe552', borderRadius: '8px'}}>
+                        <NavItem pathname={pathname} className={item.slug}>
+                            <div>
+                                <img src={item.image} alt={item.slug} />
+                            </div>
+                            <div>
+                                <h4>{item.slug}</h4>
+                            </div>
+                        </NavItem>
+                    </NavLink>
                 ))}
             </Navbar>
         </MenuContainer>

@@ -8,12 +8,17 @@ export const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
         text-decoration: none;
         border: none;
+        outline: none;
     }
     ol, ul {
         list-style: none;
+    }
+    button{
+        cursor: pointer;
     }
     body{
         background-color: #eee;
         font-family: 'Cinzel', sans-serif;
     }
+
 `
