@@ -1,23 +1,24 @@
 import styled from "styled-components";
 
-export const Container = styled.main`
-    background-color: white;
-    padding: 32px;
-    border-radius: 8px;
-    margin-right: 32px;
-    display: grid;
-    grid-template-columns: 1fr;
-`
 export const Form = styled.form`
+    background-color: white;
+    border-radius: 8px;
     display: flex;
-    align-items: center;
     flex-direction: column;
-    padding: 8px;
-    width: 100%;
+    padding: 32px;
+    width: 90%;
 
+    .user{
+        margin-bottom: 12px
+    }
+    h2{
+        margin-bottom: 12px;
+    }
+    
     .btn{
-        width: 100%;
-        margin: 12px 0;
+        width: 60%;
+        margin-top: 12px ;
+        align-self: center;
     }
     button{
         width: 100%;
@@ -25,7 +26,7 @@ export const Form = styled.form`
         color: white;
         font-weight: 600;
         font-size: 1.125rem;
-        padding: 8px;
+        padding: 12px;
         border-radius: 8px;
     }
 `

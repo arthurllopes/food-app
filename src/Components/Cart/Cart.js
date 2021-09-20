@@ -2,26 +2,28 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { CartContainer, CartItem } from './style'
-import {removeItem} from'../../store/Cart'
+import {plusQt, minusQt, removeItem} from'../../store/Cart'
 
 const Cart = ({check}) => {
     const {items, total} = useSelector(state => state.Cart)
     const dispatch = useDispatch()
-    function handleRemove(){
-        dispatch(removeItem(2))
+    
+    function addQt(target){
+        const ID = Number(target.id)
+        const indexItem = items.map(({id}) => id).indexOf(ID);
+        dispatch(plusQt(indexItem))
     }
-    console.log(total)
-    console.log(items)
-
-    function add(){
-        
-    }
-    function remove(){
-        
+    function remove(target){
+        const ID = Number(target.id)
+        const indexItem = items.map(({id}) => id).indexOf(ID);
+        if(items[indexItem].qt > 1){
+            dispatch(minusQt(indexItem))
+        } else {
+            dispatch(removeItem(ID))
+        }
     }
     return (
         <CartContainer>
-            <button onClick={handleRemove}>triplo</button>
             <div>
                 <h2>Seu carrinho</h2>
             </div>
@@ -30,12 +32,12 @@ const Cart = ({check}) => {
             <>
                 <div>
                     <ul>
-                        {items.map((item, index) => (
-                            <CartItem key={index}>
+                        {items.map((item) => (
+                            <CartItem key={item.id}>
                                 <div className="qt">
-                                    <button onClick={add}>+</button>
+                                    <button id={item.id} onClick={({target}) => remove(target)}>-</button>
                                     <span>{item.qt}</span>
-                                    <button onClick={remove}>-</button>
+                                    <button id={item.id} onClick={({target}) => addQt(target)}>+</button>
                                 </div>
                                 <div className="img">
                                     <img src={item.img} alt={item.title} />
@@ -44,14 +46,14 @@ const Cart = ({check}) => {
                                     {item.title}
                                 </div>
                                 <div className="price">
-                                    {item.total}
+                                    {item.total},00
                                 </div>
                             </CartItem>
                         ))}
                     </ul>
                 </div>
                 <div className="total">
-                    Total: {total}
+                    Total: {total},00
                 </div>
                 {check &&
                 <Link to="checkout">

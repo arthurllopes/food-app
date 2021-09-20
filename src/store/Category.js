@@ -21,7 +21,7 @@ export const newItems = (category) => async (dispatch) => {
     try {
         const response = await api.get(`/${category === 'Pizzas' ? 'pizza' : category}`)
         const data = await response.data
-        dispatch(setItems(data))
+        return dispatch(setItems(data))
     } catch (error) {
         return dispatch(setItems(error))
     }

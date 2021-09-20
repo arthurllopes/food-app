@@ -1,7 +1,7 @@
 import React from 'react'
 import { InputContainer } from './style'
 
-const UserInput = ({...props}) => {
+const Input = ({...props}) => {
     return (
         <InputContainer>
             <label htmlFor={props.name}>{props.label}</label>
@@ -10,4 +10,4 @@ const UserInput = ({...props}) => {
     )
 }
 
-export default UserInput
+export default Input

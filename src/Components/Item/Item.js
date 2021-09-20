@@ -1,20 +1,12 @@
 import React from 'react'
 import { ItemContainer } from './style'
 import {useDispatch} from 'react-redux'
-import {setCart, setTotal} from '../../store/Cart'
-import { useSelector } from 'react-redux'
+import { setCart} from '../../store/Cart'
 
 const Item = ({item}) => {
     const dispatch = useDispatch()
-    const {items} = useSelector(state => state.Cart)
-
-    const addValue = (items) => {
-        const value = items.reduce((acc, item) => acc + item.total, 0)
-        return value
-    }
     function handleClick(){
         dispatch(setCart({...item, qt: 1, total: item.price}))
-        dispatch(setTotal(addValue(items)))
     }
     return (
         <ItemContainer onClick={handleClick}>
