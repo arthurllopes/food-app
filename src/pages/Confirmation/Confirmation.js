@@ -2,16 +2,15 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { ConfirmationContainer } from './style'
 import { CartItem } from '../../Components/Cart/style'
+import {FaCheckCircle} from 'react-icons/fa'
 
 const Confirmation = () => {
-    const {items, total} = useSelector(state => state.Cart)
-    const order = useSelector(state => state.Order.items)
+    const {items, total, deliver} = useSelector(state => state.Order)
     return (
         <ConfirmationContainer>
-            <div>
-                <ion-icon name="checkmark-circle"></ion-icon>
-                {order[0]}
-                <h2>Pedido finalizado</h2>
+            <div style={{display: 'flex'}}>
+                <FaCheckCircle style={{fontSize: '28px', marginRight: '12px', color: 'green'}} />
+                <h2>Pedido confirmado</h2>
             </div>
             <div >
                 <div>    
@@ -39,7 +38,7 @@ const Confirmation = () => {
                     <h4 >R$ {total},00</h4>
                 </div>
             </div>
-            {'delivery' === "delivery" ? (
+            {deliver === "delivery" ? (
                 <p>Seu pedido será entregue em aproximadamente 60 minutos.</p>
             ) : (
                 <p>Em 25 minutos seu pedido estará pronto para ser retirado em nossa loja.</p>

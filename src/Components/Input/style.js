@@ -25,5 +25,6 @@ export const InputContainer = styled.div`
         font-weight: 500;
         line-height: 1;
         padding-bottom: 8px;
+        font-weight: 600;
     }
 `

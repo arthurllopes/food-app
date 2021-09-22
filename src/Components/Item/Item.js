@@ -1,15 +1,15 @@
 import React from 'react'
 import { ItemContainer } from './style'
-import {useDispatch} from 'react-redux'
-import { setCart} from '../../store/Cart'
+import { useDispatch } from 'react-redux'
+import { setCart } from '../../store/Cart'
 
 const Item = ({item}) => {
     const dispatch = useDispatch()
     function handleClick(){
-        dispatch(setCart({...item, qt: 1, total: item.price}))
+        dispatch(setCart({...item, qt: 1, total: item.price, onCart: true}))
     }
     return (
-        <ItemContainer onClick={handleClick}>
+        <ItemContainer onClick={({target}) => handleClick()}>
             {item.offer && <div className="offer"><p>Oferta</p></div>}
             <div>
                 <img src={item.img} alt={item.title} />

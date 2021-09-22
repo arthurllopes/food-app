@@ -42,6 +42,18 @@ export const ItemContainer = styled.div`
         border-radius: 8px;
     }
     animation: enterLeft ease 1s forwards;
+    .disable::after {
+        content: '';
+        position: absolute;
+        z-index: 999;
+        cursor: default;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 8px;
+    }
 
     @keyframes enterLeft {
         from {

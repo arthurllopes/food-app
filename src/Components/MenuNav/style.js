@@ -13,6 +13,10 @@ export const Navbar = styled.ul`
     margin: 0 auto;
     background-color: transparent;
     padding: 8px;
+    .active{
+        background-color: #ffe552;
+        border-radius: 8px;
+    }
 `
 export const NavItem = styled.li`
     display: flex;
