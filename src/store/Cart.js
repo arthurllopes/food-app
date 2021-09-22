@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const setTotal = (items) => {
+    const cartTotal = items.reduce((acc, item) => acc + item.total, 0)
+    return cartTotal
+}
 const slice = createSlice({
     name: 'Cart',
     initialState: {
@@ -9,23 +13,42 @@ const slice = createSlice({
     reducers: {
         setCart(state, action){
             state.items = [action.payload, ...state.items]
-            state.total = state.items.reduce((acc, item) => acc + item.total, 0)
+            state.total = setTotal(state.items)
         },
         removeItem(state, action){
-            state.items = [...state.items.filter(({id}) => id !== action.payload)]
-            state.total = state.items.reduce((acc, item) => acc + item.total, 0)
+            state.items = [...action.payload]
+            state.total = setTotal(state.items)
         },
-        plusQt(state, action){
+        changeQuantity(state, action){
             state.items[action.payload.index] = {...action.payload.state}
-            state.total = state.items.reduce((acc, item) => acc + item.total, 0)
-        },
-        minusQt(state, action){
-            state.items[action.payload.index] = {...action.payload.state}
-            state.total = state.items.reduce((acc, item) => acc + item.total, 0)
-        },
+            state.total = setTotal(state.items)
+        }
     }
 })
 
-export const {setCart, removeItem, plusQt, minusQt} = slice.actions
+export const {setCart, removeItem, changeQuantity} = slice.actions
+
+
+export const changeItem = (ID, type) => (dispatch, getState) => {
+    const {items} = getState().Cart
+    const index = items.map(({id}) => id).indexOf(ID);
+    const selectedItem = items[index]
+    if(type === 'plus') {
+        const quantity = selectedItem.qt + 1
+        const itemTotal = selectedItem.price * quantity
+        const state = {...selectedItem, qt: quantity, total: itemTotal}  
+        dispatch(changeQuantity({index, state}))
+    } else {
+        if(selectedItem.qt > 1) {
+            const quantity = selectedItem.qt - 1
+            const itemTotal = selectedItem.price * quantity
+            const state = {...selectedItem, qt: quantity, total: itemTotal}
+            dispatch(changeQuantity({index, state}))
+        } else {
+            const cartItems = items.filter(({id}) => id !== ID)
+            dispatch(removeItem(cartItems))
+        }
+    }
+}
 
 export default slice.reducer
