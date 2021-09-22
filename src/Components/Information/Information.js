@@ -37,8 +37,8 @@ const Information = () => {
     }
 
     function handleSubmit(event){
-        if (!error) {
-            event.preventDefault()
+        event.preventDefault()
+        if (!error && !items) {
             dispatch(setOrder({items, total, user: {name, phone}}))
             navigate('/confirmation')
         }
@@ -56,7 +56,8 @@ const Information = () => {
             <div>
                 <h2>Como gostaria de ter sua refeição?</h2>
                 <DeliverOption />    
-                {error && <p> !!! Preencha um número de telefone válido.</p> }
+                {error && <p> !!! Preencha um número de telefone válido.</p>}
+                {items.length === 0 && <p> !!! Você não possui itens no carrinho.</p> }
             </div>
             <div className="btn" onSubmit={(event) => handleSubmit(event)}>
                 <button type="submit" >

@@ -11,13 +11,24 @@ const Cart = ({check}) => {
     function addQt(target){
         const ID = Number(target.id)
         const indexItem = items.map(({id}) => id).indexOf(ID);
-        dispatch(plusQt(indexItem))
+        const selectedItem = items[indexItem]
+        console.log(selectedItem)
+        const quantity = selectedItem.qt + 1
+        const itemTotal = selectedItem.price * quantity
+        console.log(itemTotal)
+        const state = {...selectedItem, qt: quantity, total: itemTotal}
+        dispatch(plusQt({index: indexItem, state: state}))
     }
     function remove(target){
         const ID = Number(target.id)
         const indexItem = items.map(({id}) => id).indexOf(ID);
         if(items[indexItem].qt > 1){
-            dispatch(minusQt(indexItem))
+            const selectedItem = items[indexItem]
+            console.log(selectedItem)
+            const quantity = selectedItem.qt - 1
+            const itemTotal = selectedItem.price * quantity
+            const state = {...selectedItem, qt: quantity, total: itemTotal}
+            dispatch(minusQt({index: indexItem, state: state}))
         } else {
             dispatch(removeItem(ID))
         }

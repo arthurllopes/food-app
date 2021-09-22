@@ -16,16 +16,15 @@ const slice = createSlice({
             state.total = state.items.reduce((acc, item) => acc + item.total, 0)
         },
         plusQt(state, action){
-            state.items[action.payload] = {...state.items[action.payload], qt: state.items[action.payload].qt + 1, total: state.items[action.payload].price * (state.items[action.payload].qt + 1)}
+            state.items[action.payload.index] = {...action.payload.state}
             state.total = state.items.reduce((acc, item) => acc + item.total, 0)
         },
         minusQt(state, action){
-            state.items[action.payload] = {...state.items[action.payload], qt: state.items[action.payload].qt - 1, total: state.items[action.payload].price * (state.items[action.payload].qt - 1)}
+            state.items[action.payload.index] = {...action.payload.state}
             state.total = state.items.reduce((acc, item) => acc + item.total, 0)
         },
     }
 })
-
 
 export const {setCart, removeItem, plusQt, minusQt} = slice.actions
 
