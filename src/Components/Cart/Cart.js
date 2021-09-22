@@ -12,7 +12,6 @@ const Cart = ({check}) => {
         const ID = Number(target.id)
         const indexItem = items.map(({id}) => id).indexOf(ID);
         const selectedItem = items[indexItem]
-        console.log(selectedItem)
         const quantity = selectedItem.qt + 1
         const itemTotal = selectedItem.price * quantity
         console.log(itemTotal)
@@ -24,7 +23,6 @@ const Cart = ({check}) => {
         const indexItem = items.map(({id}) => id).indexOf(ID);
         if(items[indexItem].qt > 1){
             const selectedItem = items[indexItem]
-            console.log(selectedItem)
             const quantity = selectedItem.qt - 1
             const itemTotal = selectedItem.price * quantity
             const state = {...selectedItem, qt: quantity, total: itemTotal}
