@@ -6,7 +6,6 @@ import AddressSet from '../AddressSet/AddressSet'
 
 const DeliverOption = () => {
     const {deliver} = useSelector(state => state.Order)
-    const {address} = useSelector(state => state.Order.info)
     const dispatch = useDispatch()
     function handleChange(target){
         if (target.value === "take-away") {

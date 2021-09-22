@@ -9,9 +9,9 @@ import { useNavigate } from 'react-router-dom'
 
 const Information = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const {items, total} = useSelector(state => state.Cart)
 
-    const navigate = useNavigate()
     const [name, setName] = React.useState('')
     const [phone, setPhone] = React.useState('')
     const [error, setError] = React.useState(false)
@@ -38,7 +38,7 @@ const Information = () => {
 
     function handleSubmit(event){
         event.preventDefault()
-        if (!error && !items) {
+        if (!error && items) {
             dispatch(setOrder({items, total, user: {name, phone}}))
             navigate('/confirmation')
         }
@@ -48,7 +48,7 @@ const Information = () => {
             <div className="user">
                 <h2>Seus Dados</h2>
                 <div>
-                    <Input label="Nome" type="text" name="name" placeholder="Digite seu nome" onBlur={console.log('mudou')} required value={name} onChange={({target}) => setName(target.value)} />
+                    <Input label="Nome" type="text" name="name" placeholder="Digite seu nome" required value={name} onChange={({target}) => setName(target.value)} />
                     <Input label="Celular" type="number" name="phone" placeholder="Digite seu número" required value={phone} onChange={({target}) => handleChange(target)} onBlur={({target}) => handleBlur(target)} />
                     {error && <p>Preencha um número de telefone válido.</p> }
                 </div>
@@ -59,11 +59,10 @@ const Information = () => {
                 {error && <p> !!! Preencha um número de telefone válido.</p>}
                 {items.length === 0 && <p> !!! Você não possui itens no carrinho.</p> }
             </div>
-            <div className="btn" onSubmit={(event) => handleSubmit(event)}>
-                <button type="submit" >
+            <div className="btn" >
+                <button type="submit">
                     Confirmar pedido
                 </button>
-
             </div>   
        </Form>
     )

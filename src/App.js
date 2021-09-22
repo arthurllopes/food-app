@@ -9,9 +9,9 @@ function App() {
       <BrowserRouter>
         <GlobalStyle />
         <Routes>
-          <Route path="/confirmation" element={<Confirmation />}/>
+          <Route path="confirmation" element={<Confirmation />}/>
             
-          <Route path="/checkout" element={<Checkout />}/>
+          <Route path="checkout" element={<Checkout />}/>
             
           <Route path="/*" element={<Home />}/>
             
